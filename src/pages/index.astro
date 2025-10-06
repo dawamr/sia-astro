@@ -1,16 +1,107 @@
 ---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Button from '@components/common/Button.astro';
 
+// Static page - can be prerendered
+export const prerender = true;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="SIA - Student Information System">
+  <div class="hero min-h-screen bg-base-200">
+    <div class="hero-content text-center">
+      <div class="max-w-2xl">
+        <div class="mb-8">
+          <div class="avatar placeholder mx-auto">
+            <div class="w-24 rounded-2xl bg-primary text-primary-content">
+              <span class="text-5xl font-bold">S</span>
+            </div>
+          </div>
+        </div>
+        
+        <h1 class="text-5xl font-bold">Student Information System</h1>
+        <p class="py-6 text-lg">
+          Modern, efficient, and user-friendly platform for managing school operations.
+          Empowering educators, administrators, and students.
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/login">
+            <Button variant="primary" size="lg">
+              Login to Dashboard
+            </Button>
+          </a>
+          <a href="#features">
+            <Button variant="ghost" size="lg">
+              Learn More
+            </Button>
+          </a>
+        </div>
+        
+        <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div class="card bg-base-100 shadow-md">
+            <div class="card-body items-center text-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-12 w-12 text-primary"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                ></path>
+              </svg>
+              <h3 class="card-title">User Management</h3>
+              <p class="text-sm">Manage students, teachers, and administrators</p>
+            </div>
+          </div>
+          
+          <div class="card bg-base-100 shadow-md">
+            <div class="card-body items-center text-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-12 w-12 text-primary"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
+              </svg>
+              <h3 class="card-title">Academic Tracking</h3>
+              <p class="text-sm">Track assignments, grades, and progress</p>
+            </div>
+          </div>
+          
+          <div class="card bg-base-100 shadow-md">
+            <div class="card-body items-center text-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-12 w-12 text-primary"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                ></path>
+              </svg>
+              <h3 class="card-title">Analytics</h3>
+              <p class="text-sm">Insights and reports for better decisions</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
