@@ -6,9 +6,40 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write \"src/**/*.{astro,ts,tsx,js,jsx,svelte}\"",
+    "format:check": "prettier --check \"src/**/*.{astro,ts,tsx,js,jsx,svelte}\"",
+    "type-check": "astro check"
   },
   "dependencies": {
-    "astro": "^5.14.1"
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/cloudflare": "^12.6.9",
+    "@astrojs/react": "^4.4.0",
+    "@astrojs/svelte": "^7.2.0",
+    "@nanostores/react": "^1.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "astro": "^5.14.1",
+    "clsx": "^2.1.1",
+    "daisyui": "^5.1.26",
+    "lucide-react": "^0.544.0",
+    "lucide-svelte": "^0.544.0",
+    "nanostores": "^1.0.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "svelte": "^5.39.8",
+    "typescript": "^5.9.3",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@astrojs/tailwind": "^6.0.2",
+    "@iconify-json/lucide": "^1.2.68",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-svelte": "^3.4.0",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "tailwindcss": "^3.4.18"
   }
 }
