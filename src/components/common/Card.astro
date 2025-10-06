@@ -1,0 +1,226 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  class?: string;
+  hover?: boolean;
+  glow?: boolean;
+  gradient?: boolean;
+  noPadding?: boolean;
+}
+
+const { 
+  title, 
+  subtitle,
+  class: className = '',
+  hover = true,
+  glow = false,
+  gradient = false,
+  noPadding = false,
+} = Astro.props;
+---
+
+<div 
+  class:list={[
+    'modern-card',
+    { 'modern-card-hover': hover },
+    { 'modern-card-glow': glow },
+    { 'modern-card-gradient': gradient },
+    className
+  ]}
+>
+  <!-- Animated border -->
+  <div class="modern-card-border"></div>
+  
+  <!-- Content -->
+  <div class:list={['modern-card-content', { 'p-0': noPadding }]}>
+    {(title || subtitle) && (
+      <div class="modern-card-header">
+        {title && (
+          <h3 class="modern-card-title">
+            {title}
+          </h3>
+        )}
+        {subtitle && (
+          <p class="modern-card-subtitle">
+            {subtitle}
+          </p>
+        )}
+      </div>
+    )}
+    
+    <div class="modern-card-body">
+      <slot />
+    </div>
+  </div>
+  
+  <!-- Shine effect -->
+  <div class="modern-card-shine"></div>
+</div>
+
+<style>
+  .modern-card {
+    @apply relative overflow-hidden rounded-2xl;
+    @apply bg-base-100 border border-base-300/50;
+    @apply transition-all duration-300 ease-out;
+    @apply shadow-lg;
+  }
+
+  /* Animated border */
+  .modern-card-border {
+    @apply absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      oklch(var(--p) / 0.3),
+      oklch(var(--s) / 0.3),
+      transparent
+    );
+    background-size: 200% 200%;
+  }
+
+  .modern-card:hover .modern-card-border {
+    @apply opacity-100;
+    animation: borderGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes borderGlow {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* Hover effect */
+  .modern-card-hover:hover {
+    transform: translateY(-4px);
+    @apply shadow-2xl;
+    border-color: oklch(var(--p) / 0.3);
+  }
+
+  /* Glow effect */
+  .modern-card-glow {
+    box-shadow: 
+      0 10px 25px -5px rgba(0, 0, 0, 0.1),
+      0 0 30px -10px oklch(var(--p) / 0.3);
+  }
+
+  .modern-card-glow:hover {
+    box-shadow: 
+      0 20px 40px -10px rgba(0, 0, 0, 0.2),
+      0 0 50px -10px oklch(var(--p) / 0.5);
+  }
+
+  /* Gradient background */
+  .modern-card-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(var(--b1)),
+      oklch(var(--b2))
+    );
+  }
+
+  .modern-card-gradient::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(
+      135deg,
+      oklch(var(--p) / 0.05),
+      oklch(var(--s) / 0.05)
+    );
+  }
+
+  .modern-card-gradient:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Content */
+  .modern-card-content {
+    @apply relative z-10 p-6;
+  }
+
+  /* Header */
+  .modern-card-header {
+    @apply mb-4 pb-4 border-b border-base-300/50;
+  }
+
+  .modern-card-title {
+    @apply text-xl font-bold;
+    @apply bg-gradient-to-r from-base-content to-base-content/70 bg-clip-text text-transparent;
+  }
+
+  .modern-card-subtitle {
+    @apply text-sm text-base-content/60 mt-1;
+  }
+
+  /* Body */
+  .modern-card-body {
+    @apply relative;
+  }
+
+  /* Shine effect */
+  .modern-card-shine {
+    @apply absolute inset-0 opacity-0 pointer-events-none;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transform: translateX(-100%) skewX(-15deg);
+  }
+
+  .modern-card:hover .modern-card-shine {
+    animation: cardShine 1.5s ease-in-out;
+  }
+
+  @keyframes cardShine {
+    0% {
+      transform: translateX(-100%) skewX(-15deg);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(200%) skewX(-15deg);
+      opacity: 0;
+    }
+  }
+
+  /* Backdrop blur variant */
+  .modern-card-blur {
+    @apply backdrop-blur-xl;
+    background: oklch(var(--b1) / 0.8);
+  }
+
+  /* Interactive states */
+  .modern-card:active:not(.modern-card-static) {
+    transform: translateY(-2px);
+  }
+
+  /* Loading state */
+  .modern-card-loading {
+    @apply pointer-events-none;
+    position: relative;
+  }
+
+  .modern-card-loading::after {
+    content: '';
+    @apply absolute inset-0 bg-base-100/50 backdrop-blur-sm;
+    @apply flex items-center justify-center;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .modern-card-content {
+      @apply p-4;
+    }
+    
+    .modern-card-title {
+      @apply text-lg;
+    }
+  }
+</style>

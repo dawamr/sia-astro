@@ -1,0 +1,283 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'accent' | 'ghost' | 'error' | 'success' | 'warning';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  glow?: boolean;
+  outline?: boolean;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  disabled = false,
+  type = 'button',
+  class: className = '',
+  glow = false,
+  outline = false,
+} = Astro.props;
+
+const sizeClasses = {
+  xs: 'px-3 py-1.5 text-xs',
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-2.5 text-base',
+  lg: 'px-8 py-3 text-lg',
+  xl: 'px-10 py-4 text-xl',
+};
+---
+
+<button
+  type={type}
+  disabled={disabled}
+  class:list={[
+    'modern-btn',
+    `modern-btn-${variant}`,
+    sizeClasses[size],
+    { 'modern-btn-glow': glow },
+    { 'modern-btn-outline': outline },
+    { 'modern-btn-disabled': disabled },
+    className
+  ]}
+>
+  <span class="modern-btn-content">
+    <slot />
+  </span>
+  <span class="modern-btn-shine"></span>
+</button>
+
+<style>
+  .modern-btn {
+    @apply relative overflow-hidden rounded-xl font-semibold;
+    @apply transition-all duration-300 ease-out;
+    @apply inline-flex items-center justify-center gap-2;
+    @apply border-2 border-transparent;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+    transform: translateY(0);
+  }
+
+  .modern-btn:hover:not(.modern-btn-disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+  }
+
+  .modern-btn:active:not(.modern-btn-disabled) {
+    transform: translateY(0);
+  }
+
+  .modern-btn-content {
+    @apply relative z-10 flex items-center gap-2;
+  }
+
+  /* Shine effect */
+  .modern-btn-shine {
+    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transform: translateX(-100%);
+  }
+
+  .modern-btn:hover:not(.modern-btn-disabled) .modern-btn-shine {
+    @apply opacity-100;
+    animation: shine 0.8s ease-in-out;
+  }
+
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Primary variant */
+  .modern-btn-primary {
+    @apply text-primary-content;
+    background: linear-gradient(to right, var(--p), oklch(var(--p) / 0.9));
+  }
+  
+  .modern-btn-primary:hover:not(.modern-btn-disabled) {
+    background: linear-gradient(to right, var(--p), oklch(var(--p) / 0.8));
+  }
+  
+  .modern-btn-primary:focus {
+    box-shadow: 0 0 0 3px oklch(var(--p) / 0.5);
+  }
+
+  .modern-btn-primary.modern-btn-glow {
+    box-shadow: 0 0 20px oklch(var(--p) / 0.5);
+  }
+
+  .modern-btn-primary.modern-btn-outline {
+    @apply bg-transparent border-primary text-primary;
+    background: transparent;
+  }
+  
+  .modern-btn-primary.modern-btn-outline:hover:not(.modern-btn-disabled) {
+    background: oklch(var(--p) / 0.1);
+  }
+
+  /* Secondary variant */
+  .modern-btn-secondary {
+    @apply text-secondary-content;
+    background: linear-gradient(to right, var(--s), oklch(var(--s) / 0.9));
+  }
+  
+  .modern-btn-secondary:hover:not(.modern-btn-disabled) {
+    background: linear-gradient(to right, var(--s), oklch(var(--s) / 0.8));
+  }
+  
+  .modern-btn-secondary:focus {
+    box-shadow: 0 0 0 3px oklch(var(--s) / 0.5);
+  }
+
+  .modern-btn-secondary.modern-btn-glow {
+    box-shadow: 0 0 20px oklch(var(--s) / 0.5);
+  }
+
+  .modern-btn-secondary.modern-btn-outline {
+    @apply bg-transparent border-secondary text-secondary;
+    background: transparent;
+  }
+  
+  .modern-btn-secondary.modern-btn-outline:hover:not(.modern-btn-disabled) {
+    background: oklch(var(--s) / 0.1);
+  }
+
+  /* Accent variant */
+  .modern-btn-accent {
+    @apply text-accent-content;
+    background: linear-gradient(to right, var(--a), oklch(var(--a) / 0.9));
+  }
+  
+  .modern-btn-accent:hover:not(.modern-btn-disabled) {
+    background: linear-gradient(to right, var(--a), oklch(var(--a) / 0.8));
+  }
+  
+  .modern-btn-accent:focus {
+    box-shadow: 0 0 0 3px oklch(var(--a) / 0.5);
+  }
+
+  .modern-btn-accent.modern-btn-glow {
+    box-shadow: 0 0 20px oklch(var(--a) / 0.5);
+  }
+
+  .modern-btn-accent.modern-btn-outline {
+    @apply bg-transparent border-accent text-accent;
+    background: transparent;
+  }
+  
+  .modern-btn-accent.modern-btn-outline:hover:not(.modern-btn-disabled) {
+    background: oklch(var(--a) / 0.1);
+  }
+
+  /* Success variant */
+  .modern-btn-success {
+    @apply text-success-content;
+    background: linear-gradient(to right, var(--su), oklch(var(--su) / 0.9));
+  }
+  
+  .modern-btn-success:hover:not(.modern-btn-disabled) {
+    background: linear-gradient(to right, var(--su), oklch(var(--su) / 0.8));
+  }
+  
+  .modern-btn-success:focus {
+    box-shadow: 0 0 0 3px oklch(var(--su) / 0.5);
+  }
+
+  .modern-btn-success.modern-btn-glow {
+    box-shadow: 0 0 20px oklch(var(--su) / 0.5);
+  }
+
+  .modern-btn-success.modern-btn-outline {
+    @apply bg-transparent border-success text-success;
+    background: transparent;
+  }
+  
+  .modern-btn-success.modern-btn-outline:hover:not(.modern-btn-disabled) {
+    background: oklch(var(--su) / 0.1);
+  }
+
+  /* Warning variant */
+  .modern-btn-warning {
+    @apply text-warning-content;
+    background: linear-gradient(to right, var(--wa), oklch(var(--wa) / 0.9));
+  }
+  
+  .modern-btn-warning:hover:not(.modern-btn-disabled) {
+    background: linear-gradient(to right, var(--wa), oklch(var(--wa) / 0.8));
+  }
+  
+  .modern-btn-warning:focus {
+    box-shadow: 0 0 0 3px oklch(var(--wa) / 0.5);
+  }
+
+  .modern-btn-warning.modern-btn-glow {
+    box-shadow: 0 0 20px oklch(var(--wa) / 0.5);
+  }
+
+  .modern-btn-warning.modern-btn-outline {
+    @apply bg-transparent border-warning text-warning;
+    background: transparent;
+  }
+  
+  .modern-btn-warning.modern-btn-outline:hover:not(.modern-btn-disabled) {
+    background: oklch(var(--wa) / 0.1);
+  }
+
+  /* Error variant */
+  .modern-btn-error {
+    @apply text-error-content;
+    background: linear-gradient(to right, var(--er), oklch(var(--er) / 0.9));
+  }
+  
+  .modern-btn-error:hover:not(.modern-btn-disabled) {
+    background: linear-gradient(to right, var(--er), oklch(var(--er) / 0.8));
+  }
+  
+  .modern-btn-error:focus {
+    box-shadow: 0 0 0 3px oklch(var(--er) / 0.5);
+  }
+
+  .modern-btn-error.modern-btn-glow {
+    box-shadow: 0 0 20px oklch(var(--er) / 0.5);
+  }
+
+  .modern-btn-error.modern-btn-outline {
+    @apply bg-transparent border-error text-error;
+    background: transparent;
+  }
+  
+  .modern-btn-error.modern-btn-outline:hover:not(.modern-btn-disabled) {
+    background: oklch(var(--er) / 0.1);
+  }
+
+  /* Ghost variant */
+  .modern-btn-ghost {
+    @apply bg-transparent text-base-content hover:bg-base-200;
+  }
+  
+  .modern-btn-ghost:focus {
+    box-shadow: 0 0 0 3px oklch(var(--bc) / 0.2);
+  }
+
+  .modern-btn-ghost.modern-btn-outline {
+    border-color: oklch(var(--bc) / 0.2);
+  }
+
+  /* Disabled state */
+  .modern-btn-disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  .modern-btn-disabled:hover {
+    transform: none;
+    box-shadow: none;
+  }
+</style>
