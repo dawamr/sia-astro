@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+import AuthInitializer from '@components/common/AuthInitializer';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'SIA Admin - Student Information System',
+  description = 'Modern student information system for schools',
+} = Astro.props;
+
+const canonicalURL = Astro.site 
+  ? new URL(Astro.url.pathname, Astro.site)
+  : null;
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {canonicalURL && <link rel="canonical" href={canonicalURL} />}
+    
+    <!-- Preconnect to API -->
+    <link rel="preconnect" href={import.meta.env.PUBLIC_API_URL} />
+    
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    
+    <title>{title}</title>
+    
+    <!-- Security headers meta tags -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    
+    <!-- PWA meta tags (future enhancement) -->
+    <meta name="theme-color" content="#3b82f6" />
+  </head>
+  <body class="bg-base-100 text-base-content antialiased">
+    <!-- Initialize auth state on client -->
+    <AuthInitializer client:only="react" />
+    
+    <div id="app" class="min-h-screen">
+      <slot />
+    </div>
+    
+    <!-- Theme switcher script (runs before page render) -->
+    <script is:inline>
+      // Load theme from localStorage
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+    </script>
+  </body>
+</html>

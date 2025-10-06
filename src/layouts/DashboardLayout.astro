@@ -1,0 +1,56 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '@components/layout/Header.astro';
+import Sidebar from '@components/layout/Sidebar.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+
+// Check authentication
+const accessToken = Astro.cookies.get('accessToken')?.value;
+const user = Astro.cookies.get('user')?.value;
+
+// Redirect to login if not authenticated
+if (!accessToken || !user) {
+  return Astro.redirect('/login');
+}
+
+// Parse user data
+let userData;
+try {
+  userData = JSON.parse(user);
+} catch (error) {
+  // Invalid user data, redirect to login
+  Astro.cookies.delete('accessToken');
+  Astro.cookies.delete('user');
+  return Astro.redirect('/login');
+}
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="drawer lg:drawer-open">
+    <input id="sidebar-drawer" type="checkbox" class="drawer-toggle" />
+    
+    <div class="drawer-content flex flex-col">
+      <!-- Header -->
+      <Header />
+      
+      <!-- Page content -->
+      <main class="flex-1 overflow-y-auto bg-base-200 p-4 lg:p-6">
+        <div class="mx-auto max-w-7xl">
+          <slot />
+        </div>
+      </main>
+    </div>
+    
+    <!-- Sidebar -->
+    <div class="drawer-side z-40">
+      <label for="sidebar-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+      <Sidebar />
+    </div>
+  </div>
+</BaseLayout>
