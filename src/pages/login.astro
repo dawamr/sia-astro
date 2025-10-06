@@ -1,0 +1,138 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import LoginForm from '@components/ui/LoginForm';
+
+// Server-side rendering for login page
+export const prerender = false;
+---
+
+<BaseLayout title="Sign In - SIA Admin">
+  <div class="min-h-screen flex">
+    <!-- Left Side - Login Form -->
+    <div class="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-base-100">
+      <div class="w-full max-w-md space-y-8">
+        <!-- Logo and Title -->
+        <div class="text-center">
+          <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-secondary text-primary-content shadow-lg mb-6">
+            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <h1 class="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            Welcome Back
+          </h1>
+          <p class="mt-3 text-base-content/70">Sign in to continue to SIA Admin</p>
+        </div>
+
+        <!-- Login Form Card -->
+        <div class="bg-base-200/50 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-base-300">
+          <LoginForm client:only="react" />
+        </div>
+
+        <!-- Footer Links -->
+        <div class="text-center space-y-3">
+          <p class="text-sm text-base-content/60">
+            Don't have an account? 
+            <a href="/register" class="link link-primary font-semibold ml-1">Sign up</a>
+          </p>
+          <div class="flex items-center justify-center gap-4 text-sm">
+            <a href="/" class="link link-hover text-base-content/60">← Home</a>
+            <span class="text-base-content/30">•</span>
+            <a href="/support" class="link link-hover text-base-content/60">Support</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side - Decorative -->
+    <div class="hidden lg:flex lg:flex-1 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 items-center justify-center p-12 relative overflow-hidden">
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 -left-4 w-72 h-72 bg-primary rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+        <div class="absolute top-0 -right-4 w-72 h-72 bg-secondary rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-accent rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+      </div>
+
+      <!-- Content -->
+      <div class="relative z-10 max-w-md text-center space-y-8">
+        <div>
+          <h2 class="text-4xl font-bold mb-4">Student Information System</h2>
+          <p class="text-lg text-base-content/70">
+            Manage your educational institution efficiently with our comprehensive platform
+          </p>
+        </div>
+
+        <!-- Features -->
+        <div class="grid gap-6 mt-12">
+          <div class="flex items-start gap-4 p-4 rounded-xl bg-base-100/50 backdrop-blur-sm">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="text-left">
+              <h3 class="font-semibold">Secure & Reliable</h3>
+              <p class="text-sm text-base-content/60">Enterprise-grade security for your data</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 rounded-xl bg-base-100/50 backdrop-blur-sm">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 rounded-lg bg-secondary/20 flex items-center justify-center">
+                <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="text-left">
+              <h3 class="font-semibold">Lightning Fast</h3>
+              <p class="text-sm text-base-content/60">Optimized performance for smooth experience</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 rounded-xl bg-base-100/50 backdrop-blur-sm">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center">
+                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="text-left">
+              <h3 class="font-semibold">Always Available</h3>
+              <p class="text-sm text-base-content/60">Access from anywhere, anytime</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes blob {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(30px, -50px) scale(1.1);
+      }
+      66% {
+        transform: translate(-20px, 20px) scale(0.9);
+      }
+    }
+
+    .animate-blob {
+      animation: blob 7s infinite;
+    }
+
+    .animation-delay-2000 {
+      animation-delay: 2s;
+    }
+
+    .animation-delay-4000 {
+      animation-delay: 4s;
+    }
+  </style>
+</BaseLayout>
