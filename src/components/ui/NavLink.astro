@@ -1,0 +1,18 @@
+---
+interface Props {
+  href: string;
+  active?: boolean;
+}
+
+const { href, active = false } = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    'flex items-center gap-3',
+    { active: active }
+  ]}
+>
+  <slot />
+</a>
