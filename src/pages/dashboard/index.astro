@@ -1,0 +1,218 @@
+---
+import DashboardLayout from '@layouts/DashboardLayout.astro';
+import Card from '@components/common/Card.astro';
+import DashboardStats from '@components/dashboard/DashboardStats';
+
+// Server-side rendered
+---
+
+<DashboardLayout title="Dashboard - SIA Admin">
+  <div class="space-y-8">
+    <!-- Welcome Header -->
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          Welcome Back!
+        </h1>
+        <p class="mt-2 text-base-content/70">Here's what's happening with your school today.</p>
+      </div>
+      <div class="hidden sm:flex gap-2">
+        <button class="btn btn-outline btn-sm gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+          </svg>
+          Customize
+        </button>
+      </div>
+    </div>
+
+    <!-- Modern Stats Cards -->
+    <DashboardStats client:load />
+
+    <!-- Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Recent Activity (2/3 width) -->
+      <div class="lg:col-span-2">
+        <div class="card bg-base-100 shadow-xl border border-base-300">
+          <div class="card-body">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="card-title text-xl">Recent Activity</h2>
+              <a href="/activity" class="link link-primary text-sm">View all</a>
+            </div>
+            
+            <div class="space-y-4">
+              <!-- Activity Item 1 -->
+              <div class="flex items-start gap-4 p-3 rounded-lg hover:bg-base-200/50 transition-colors">
+                <div class="avatar placeholder">
+                  <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary/70 text-primary-content ring-2 ring-primary/20">
+                    <span class="text-sm font-semibold">JD</span>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold">John Doe</p>
+                  <p class="text-sm text-base-content/70">Submitted Assignment #12</p>
+                  <div class="flex items-center gap-2 mt-1">
+                    <span class="badge badge-sm badge-primary">Student</span>
+                    <span class="text-xs text-base-content/50">2 hours ago</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Activity Item 2 -->
+              <div class="flex items-start gap-4 p-3 rounded-lg hover:bg-base-200/50 transition-colors">
+                <div class="avatar placeholder">
+                  <div class="w-12 h-12 rounded-full bg-gradient-to-br from-secondary to-secondary/70 text-secondary-content ring-2 ring-secondary/20">
+                    <span class="text-sm font-semibold">MS</span>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold">Mrs. Smith</p>
+                  <p class="text-sm text-base-content/70">Graded 15 assignments</p>
+                  <div class="flex items-center gap-2 mt-1">
+                    <span class="badge badge-sm badge-secondary">Teacher</span>
+                    <span class="text-xs text-base-content/50">4 hours ago</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Activity Item 3 -->
+              <div class="flex items-start gap-4 p-3 rounded-lg hover:bg-base-200/50 transition-colors">
+                <div class="avatar placeholder">
+                  <div class="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-accent/70 text-accent-content ring-2 ring-accent/20">
+                    <span class="text-sm font-semibold">AB</span>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold">Admin Bob</p>
+                  <p class="text-sm text-base-content/70">Created new class: Math 101</p>
+                  <div class="flex items-center gap-2 mt-1">
+                    <span class="badge badge-sm badge-accent">Admin</span>
+                    <span class="text-xs text-base-content/50">Yesterday</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Activity Item 4 -->
+              <div class="flex items-start gap-4 p-3 rounded-lg hover:bg-base-200/50 transition-colors">
+                <div class="avatar placeholder">
+                  <div class="w-12 h-12 rounded-full bg-gradient-to-br from-info to-info/70 text-info-content ring-2 ring-info/20">
+                    <span class="text-sm font-semibold">EJ</span>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold">Emma Johnson</p>
+                  <p class="text-sm text-base-content/70">Updated attendance records</p>
+                  <div class="flex items-center gap-2 mt-1">
+                    <span class="badge badge-sm badge-info">Teacher</span>
+                    <span class="text-xs text-base-content/50">2 days ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions (1/3 width) -->
+      <div class="space-y-6">
+        <!-- Quick Actions Card -->
+        <div class="card bg-base-100 shadow-xl border border-base-300">
+          <div class="card-body">
+            <h2 class="card-title text-xl mb-4">Quick Actions</h2>
+            
+            <div class="space-y-3">
+              <a href="/admin/users/create" class="btn btn-outline btn-primary w-full justify-start gap-3 h-12">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                </svg>
+                <span>Add New User</span>
+              </a>
+
+              <a href="/admin/classes/create" class="btn btn-outline btn-secondary w-full justify-start gap-3 h-12">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                <span>Create Class</span>
+              </a>
+
+              <a href="/teacher/assignments/create" class="btn btn-outline btn-accent w-full justify-start gap-3 h-12">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                <span>New Assignment</span>
+              </a>
+
+              <a href="/reports" class="btn btn-outline w-full justify-start gap-3 h-12">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                <span>Generate Report</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upcoming Events Card -->
+        <div class="card bg-base-100 shadow-xl border border-base-300">
+          <div class="card-body">
+            <h2 class="card-title text-xl mb-4">Upcoming</h2>
+            
+            <div class="space-y-3">
+              <div class="flex gap-3">
+                <div class="flex flex-col items-center justify-center bg-primary/10 rounded-lg px-3 py-2 min-w-[60px]">
+                  <span class="text-2xl font-bold text-primary">15</span>
+                  <span class="text-xs text-base-content/60">OCT</span>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold text-sm">Parent-Teacher Meeting</p>
+                  <p class="text-xs text-base-content/60">3:00 PM - Main Hall</p>
+                </div>
+              </div>
+
+              <div class="flex gap-3">
+                <div class="flex flex-col items-center justify-center bg-secondary/10 rounded-lg px-3 py-2 min-w-[60px]">
+                  <span class="text-2xl font-bold text-secondary">20</span>
+                  <span class="text-xs text-base-content/60">OCT</span>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold text-sm">Mid-Term Exams</p>
+                  <p class="text-xs text-base-content/60">All day - All classes</p>
+                </div>
+              </div>
+
+              <div class="flex gap-3">
+                <div class="flex flex-col items-center justify-center bg-accent/10 rounded-lg px-3 py-2 min-w-[60px]">
+                  <span class="text-2xl font-bold text-accent">25</span>
+                  <span class="text-xs text-base-content/60">OCT</span>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold text-sm">Science Fair</p>
+                  <p class="text-xs text-base-content/60">9:00 AM - Science Lab</p>
+                </div>
+              </div>
+            </div>
+
+            <a href="/events" class="btn btn-ghost btn-sm mt-2">View Calendar →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .stat-card {
+      @apply relative overflow-hidden rounded-2xl p-6 transition-all duration-300;
+      @apply hover:shadow-xl hover:-translate-y-1;
+    }
+
+    .stat-card::before {
+      content: '';
+      @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.1), transparent 70%);
+    }
+
+    .stat-card:hover::before {
+      @apply opacity-100;
+    }
+  </style>
+</DashboardLayout>
